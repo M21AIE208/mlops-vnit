@@ -1,6 +1,6 @@
 import time
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 import pickle
 import numpy
 from sklearn.tree import DecisionTreeClassifier
@@ -10,6 +10,10 @@ app = Flask(__name__)
 
 with open("./model/iris_classifier.pkl","rb") as f:
     clf = pickle.load(f)
+
+@app.route("/", methods=["GET"])
+def index():
+    return render_template("index.html")
 
 @app.route("/get_status", methods=["GET"])
 def foo():
